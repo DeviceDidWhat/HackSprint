@@ -57,13 +57,13 @@ import dailyQuizModel from "../models/dailyQuiz.model.js";
 const getDateOnly = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 
 // Auto job: runs every 5 minutes (test mode)
-cron.schedule("*0 0  * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   try {
     const today = getDateOnly(new Date());
 
     // Fetch 5 random questions
     const questions = await devquestModel.aggregate([
-      { $sample: { size: 5 } }
+      { $sample: { size: 8 } }
     ]);
 
     // Always create a NEW quiz (don’t overwrite old ones)
